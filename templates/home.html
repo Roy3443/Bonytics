@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bone Age Prediction</title>
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #000000, #210202, #9e0e03);
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            text-align: center;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background: #000000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .logo {
+            padding-left: 30px;
+            height: 120px;
+            width: 150px;
+            cursor: pointer;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        nav a:hover {
+            border: 1px solid #f44336;
+            color: #f44336;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #f44336;
+            text-shadow: 0 0 10px #f44336;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .hero button {
+            background: linear-gradient(45deg, #f44336, #8b0000);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 20px 15px 0;
+            transition: all 0.3s ease;
+        }
+        .hero button:hover {
+            background: linear-gradient(45deg, #8b0000, #f44336);
+            transform: scale(1.05);
+        }
+
+        /* Upload Section */
+        #upload-section {
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, #000000, #210202, #9e0e03);
+            display: none;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #upload-section h2 {
+            font-size: 2.5rem;
+            color: #f44336;
+            text-shadow: 0 0 10px #f44336;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .upload-container {
+            border: 3px dashed rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 50px 30px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            position: relative;
+            transition: all 0.3s ease;
+            animation: slideIn 1.5s ease;
+        }
+
+        .upload-container:hover {
+            border-color: #f44336;
+            box-shadow: 0 0 25px #f44336;
+        }
+
+        .drag-active {
+            border-color: #f44336;
+            box-shadow: 0 0 35px #f44336;
+        }
+
+        .upload-container p {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .preview-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .preview-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            display: block;
+            margin: 0 auto;
+        }
+
+        .upload-button,
+        .upload-another {
+            background: linear-gradient(45deg, #f44336, #8b0000);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 20px 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .upload-button:hover,
+        .upload-another:hover {
+            background: linear-gradient(45deg, #8b0000, #f44336);
+            transform: scale(1.05);
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <img src="/static/uploads/2ndlogo.png" alt="Bone Age Predictor Logo" class="logo">
+        <div>
+            <a href="#" onclick="showHomePage()">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="#" onclick="showUploadSection()">Upload X-ray</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+        <h1 id="animated-text"></h1>
+        <p>Predict bone age, assess growth plate closure, and analyze bone health with our advanced AI tool. Upload X-rays to get started.</p>
+        <button onclick="showUploadSection()">Get Started</button>
+    </div>
+    
+
+    <!-- Upload Section -->
+    <div id="upload-section">
+        <h2>Upload X-ray Image</h2>
+        <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+            <div 
+                class="upload-container" 
+                id="upload-container" 
+                onclick="triggerFileInput()" 
+                ondragover="highlightDropZone(event)" 
+                ondragleave="removeHighlight(event)" 
+                ondrop="handleDrop(event)">
+                <p>Drag & drop your X-ray here or click to browse.</p>
+                <input type="file" id="fileInput" name="file" accept="image/png, image/jpeg" onchange="previewImage(event)" style="display: none;">
+                <div class="preview-container" id="preview-container">
+                    <img id="preview-image" src="" alt="Image preview" style="display: none;">
+                </div>
+            </div>
+            <button type="submit" class="upload-button">Predict</button>
+            <button type="button" class="upload-another" onclick="resetUpload()">Upload Another</button>
+        </form>
+    </div>
+
+    <script>
+        function triggerFileInput() {
+            const fileInput = document.getElementById('fileInput');
+            fileInput.click();
+        }
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function () {
+                const previewImage = document.getElementById('preview-image');
+                previewImage.src = reader.result;
+                previewImage.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function highlightDropZone(event) {
+            event.preventDefault();
+            const uploadContainer = document.getElementById('upload-container');
+            uploadContainer.classList.add('drag-active');
+        }
+
+        function removeHighlight(event) {
+            const uploadContainer = document.getElementById('upload-container');
+            uploadContainer.classList.remove('drag-active');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            fileInput.files = event.dataTransfer.files;
+            fileInput.dispatchEvent(new Event('change'));
+            removeHighlight(event);
+        }
+
+        function resetUpload() {
+            const previewImage = document.getElementById('preview-image');
+            const fileInput = document.getElementById('fileInput');
+            previewImage.src = '';
+            previewImage.style.display = 'none';
+            fileInput.value = '';
+        }
+
+        function showUploadSection() {
+            const uploadSection = document.getElementById('upload-section');
+            uploadSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+    const options = {
+        strings: [
+            "Welcome to Pediatric Bone Age Prediction",
+            // "Analyze bone health using advanced AI tools",
+            // "Get started by uploading your X-rays",
+        ],
+        typeSpeed: 80, // Speed of typing
+        backSpeed: 50, // Speed of deleting
+        loop: true, // Enable infinite loop
+        showCursor: true, // Show typing cursor
+        cursorChar:"", // Customize cursor character
+        smartBackspace: true, // Only backspace text that differs
+    };
+
+    const typed = new Typed("#animated-text", options);
+});
+
+    </script>
+</body>
+</html>
