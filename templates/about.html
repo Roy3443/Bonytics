@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Bone Age Prediction</title>
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #000000, #210202, #9e0e03);
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            text-align: center;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background: #000000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav h1 {
+            color: #ffffff;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 25px;
+        }
+
+        nav a:hover {
+            border: 1px solid #f44336;
+            color: #f44336;
+            transform: translateY(-2px);
+        }
+
+        /* About Section Styling */
+        .about-container {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-container h1 {
+            font-size: 3rem;
+            color: #f44336;
+            text-shadow: 0 0 10px #f44336;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .about-container p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #dddddd;
+            max-width: 900px;
+            margin: 20px auto;
+            animation: slideInFromBottom 1.5s ease;
+        }
+
+        /* Graph Section */
+        .graph-container {
+            margin-top: 50px;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .graph-container img {
+            height: 500px;
+            width: 700px;
+            border: 2px solid #f44336;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .graph-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .graph-container h2 {
+            color: #f44336;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-card h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: #cccccc;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .about-container h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-container p {
+                font-size: 1.1rem;
+            }
+
+            .feature-card {
+                width: 100%;
+            }
+        }
+
+        nav .logo {
+            height: 120px;
+            width: 120px;
+            padding-left: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <img src="/static\uploads\logo.jpeg" alt="Bone Age Predictor Logo" class="logo">
+        <div>
+            <a href="/" onclick="showHomePage()">Home</a>
+            <a href="/about">About</a>
+            <a href="#" onclick="showUploadSection()">Upload X-ray</a>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <div class="about-container">
+        <h1>About Bone Age Predictor</h1>
+        <p>
+            Bone Age Predictor is a cutting-edge AI tool designed to assist medical professionals in diagnosing and monitoring bone growth and health. By analyzing hand X-rays, the application provides accurate bone age predictions, assesses growth plate closure, and evaluates bone density.
+        </p>
+        <p>
+            Our mission is to empower healthcare professionals with advanced, reliable, and easy-to-use tools for better patient care.
+        </p>
+
+        <!-- Graph Section -->
+        <div class="graph-container">
+            <h2>Bone age distribution dataset</h2>
+            <img src="/static/uploads/graph.jpg" alt="Growth Plate Analysis Graph">
+        </div>
+
+        <!-- Features Section -->
+        <div class="features" id="features">
+            <div class="feature-card">
+                <h3>Advanced AI</h3>
+                <p>Utilizes state-of-the-art machine learning algorithms for precise predictions.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Medical Accuracy</h3>
+                <p>Developed and validated with medical professionals for trustworthy results.</p>
+            </div>
+            <div class="feature-card">
+                <h3>User-Friendly</h3>
+                <p>Simple and intuitive interface tailored for ease of use.</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        // Navigation Page Switching Logic
+        function showHomePage() {
+            location.href = '/';
+        }
+
+        function showUploadSection() {
+            const uploadSection = document.getElementById('upload-section');
+            uploadSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
