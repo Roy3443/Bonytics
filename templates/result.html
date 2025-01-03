@@ -253,7 +253,7 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <img src="/static/uploads/2ndlogo.png" alt="Bone Age Predictor Logo" class="logo">
+        <img src="/static/uploads/logo.jpeg" alt="Bone Age Predictor Logo" class="logo">
         <div>
             <a href="/">Home</a>
             <a href="/about">About</a>
@@ -277,7 +277,7 @@
             <a href="/" class="back-button">Upload Another Image</a>
         </div>
 
-        {% if bone_density != "Normal Density" %}
+        {% if bone_density not in ["Normal Density", "High Density"] %}
         <div class="comparision-header">
         <h2>Comparison of Bone Density</h2>
         </div>
